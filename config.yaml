@@ -10,8 +10,8 @@ embedding:
   gemini_model: "gemini-embedding-2"
 
 vectordb:
-  faiss_openai: "/Users/kumar/Documents/GEN AI PROJECT/Project AI/data/embeddings/faiss_openai"
-  faiss_gemini: "/Users/kumar/Documents/GEN AI PROJECT/Project AI/data/embeddings/faiss_gemini"
+  faiss_openai: "./data/embeddings/faiss_openai"
+  faiss_gemini: "./data/embeddings/faiss_gemini"
 
 retrieval:
   top_k: 5 # Number of top documents to retrieve from each retriever
