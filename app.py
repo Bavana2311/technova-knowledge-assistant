@@ -7,9 +7,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from src.ingestion.Document_loader import load_documents
-from src.ingestion.Chunker import chunk_document
-
 
 # =========================================================
 # PAGE CONFIGURATION
@@ -163,7 +160,8 @@ memory_enabled = st.sidebar.toggle(
 
 @st.cache_resource
 def initialize_rag(session_id):
-
+    from src.ingestion.Document_loader import load_documents
+    from src.ingestion.Chunker import chunk_document
     from src.retrieval.hybrid_retriever import HybridRetriever
     from src.reranking.reranker import CrossEncoderReranker
     from src.generation.llm_generator import GeminiGenerator
