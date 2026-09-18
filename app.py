@@ -1,14 +1,12 @@
 import streamlit as st
 import yaml
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from src.ingestion.Document_loader import load_documents
 from src.ingestion.Chunker import chunk_document
-
-from src.retrieval.hybrid_retriever import HybridRetriever
-
-from src.reranking.reranker import CrossEncoderReranker
-from src.generation.llm_generator import GeminiGenerator
-from src.pipeline.rag_pipeline import RAGPipeline
 
 
 # -----------------------------
@@ -39,9 +37,18 @@ with open("./config.yaml", "r") as f:
 # -----------------------------
 # Initialize RAG pipeline
 # -----------------------------
-
+if not os.getenv("GEMINI_API_KEY"):
+    st.error("GEMINI_API_KEY is not configured.")
+    st.stop()
 @st.cache_resource
 def initialize_rag():
+
+    from src.retrieval.hybrid_retriever import HybridRetriever
+    from src.reranking.reranker import CrossEncoderReranker
+    from src.generation.llm_generator import GeminiGenerator
+    from src.pipeline.rag_pipeline import RAGPipeline
+
+    # 1. Load all documents
 
     # 1. Load all documents
 
@@ -101,9 +108,6 @@ def initialize_rag():
     return rag
 
 
-rag = initialize_rag()
-
-
 # -----------------------------
 # Chat history
 # -----------------------------
@@ -126,7 +130,17 @@ question = st.chat_input(
     "Ask a question about TechNova..."
 )
 
+
 if question:
+
+    # Initialize RAG only when the first question is asked
+    with st.spinner("Initializing knowledge assistant..."):
+
+        rag = initialize_rag()
+
+    # -----------------------------
+    # Display user question
+    # -----------------------------
 
     st.session_state.messages.append({
         "role": "user",
