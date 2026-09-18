@@ -59,7 +59,7 @@ https://github.com/Bavana2311/technova-knowledge-assistant
 
 ## 4. System Architecture
 
-```text
+
                     Enterprise Documents
                             │
                             ▼
@@ -102,7 +102,7 @@ https://github.com/Bavana2311/technova-knowledge-assistant
                             │
                             ▼
                       Streamlit UI
-```
+
 
 ---
 
@@ -127,7 +127,7 @@ https://github.com/Bavana2311/technova-knowledge-assistant
 
 ## 6. Project Structure
 
-```text
+
 Advanced RAG Pipeline/
 │
 ├── data/
@@ -169,7 +169,7 @@ Advanced RAG Pipeline/
 ├── test.ipynb
 ├── .gitignore
 └── README.md
-```
+
 
 > **Note:** The `.env` file contains the Gemini API key and should remain private. It should not be committed to GitHub.
 
@@ -247,7 +247,7 @@ It is useful for exact terms, names, policy terminology, and other keyword-heavy
 
 The two retrieval methods are combined to improve the overall retrieval process.
 
-```text
+
                  User Query
                      │
           ┌──────────┴──────────┐
@@ -258,7 +258,7 @@ The two retrieval methods are combined to improve the overall retrieval process.
           └──────────┬──────────┘
                      ▼
               Hybrid Retrieval
-```
+
 
 ---
 
