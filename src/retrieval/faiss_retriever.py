@@ -22,8 +22,12 @@ def get_embedding_model(provider: str, config: dict):
         )
 
     elif provider == "gemini":
+        api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+        if not api_key:
+            raise ValueError("GEMINI_API_KEY or GOOGLE_API_KEY not found in environment.")
         return GoogleGenerativeAIEmbeddings(
-            model=config["embedding"]["gemini_model"]
+            model=config["embedding"]["gemini_model"],
+            google_api_key=api_key
         )
 
     else:
